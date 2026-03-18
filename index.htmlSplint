@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Splint Invest — Investissez dans l'exceptionnel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0a0e1a;
+      --navy-2: #0f1628;
+      --navy-3: #151d35;
+      --blue: #1a6cff;
+      --blue-light: #3d8bff;
+      --cyan: #00d4ff;
+      --green: #00e5a0;
+      --white: #f0f4ff;
+      --muted: #8892b0;
+      --card: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10,14,26,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--cyan); }
+
+    .nav-cta {
+      background: var(--blue);
+      color: white;
+      text-decoration: none;
+      padding: 0.55rem 1.3rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue-light); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 2rem 5rem;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,108,255,0.18) 0%, transparent 70%);
+      top: -100px; right: -150px;
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 70%);
+      bottom: 50px; left: -100px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid rgba(0,212,255,0.2);
+      color: var(--cyan);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    h1 .accent { color: var(--cyan); }
+    h1 .accent-2 { color: var(--blue-light); }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: white;
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.25s;
+      box-shadow: 0 8px 32px rgba(26,108,255,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(26,108,255,0.5); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.25s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+
+    /* ── HERO CARD ── */
+    .hero-card {
+      background: var(--navy-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    }
+
+    .card-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .card-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .card-value.green { color: var(--green); }
+    .card-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1.2rem 0;
+    }
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+    .card-row:last-child { margin-bottom: 0; }
+    .row-label { font-size: 0.85rem; color: var(--muted); }
+    .row-value { font-weight: 600; font-size: 0.9rem; }
+    .row-value.up { color: var(--green); }
+    .row-value.neutral { color: var(--white); }
+
+    .portfolio-tag {
+      display: inline-block;
+      background: rgba(0,229,160,0.1);
+      border: 1px solid rgba(0,229,160,0.2);
+      color: var(--green);
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    /* ── BONUS BANNER ── */
+    .bonus-banner {
+      background: linear-gradient(135deg, rgba(26,108,255,0.15), rgba(0,212,255,0.1));
+      border: 1px solid rgba(0,212,255,0.25);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 0 auto 5rem;
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+    .bonus-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+    .bonus-text strong {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .bonus-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+    .bonus-text p span { color: var(--cyan); font-weight: 500; }
+    .bonus-badge {
+      margin-left: auto;
+      background: var(--green);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      white-space: nowrap;
+      font-family: 'Syne', sans-serif;
+      flex-shrink: 0;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--cyan);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    /* ── WHAT IS SPLINT ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.8rem;
+      transition: all 0.25s;
+    }
+    .feature-card:hover {
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.14);
+    }
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .feature-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .feature-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── PERFS ── */
+    .perfs-section { background: var(--navy-2); }
+
+    .perfs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .stat-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem;
+    }
+    .stat-card .sc-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .stat-card .sc-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .stat-card .sc-value.green { color: var(--green); }
+    .stat-card .sc-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .asset-showcase {
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .asset-header {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: flex;
+      justify-content: space-between;
+    }
+    .asset-item {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+    }
+    .asset-item:last-child { border-bottom: none; }
+    .asset-item:hover { background: rgba(255,255,255,0.03); }
+    .asset-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+    .asset-cat {
+      font-size: 0.73rem;
+      color: var(--muted);
+    }
+    .asset-perf {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .asset-perf.green { color: var(--green); }
+    .asset-perf.neutral { color: var(--muted); }
+
+    .disclaimer {
+      margin-top: 1rem;
+      font-size: 0.73rem;
+      color: rgba(136,146,176,0.6);
+      font-style: italic;
+    }
+
+    /* ── STAR ASSET ── */
+    .star-asset {
+      background: linear-gradient(135deg, rgba(26,108,255,0.12), rgba(0,212,255,0.06));
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .star-asset::before {
+      content: '⭐ Exemple d\'actif en vedette';
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--cyan);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+    .star-asset-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .star-asset-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 0.8rem;
+    }
+    .sas-item { }
+    .sas-label { font-size: 0.72rem; color: var(--muted); }
+    .sas-value { font-weight: 700; font-size: 1rem; }
+    .sas-value.green { color: var(--green); }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      counter-reset: step;
+    }
+    .step {
+      position: relative;
+      padding: 1.8rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .step-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: rgba(26,108,255,0.2);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .step-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .step-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: 0.8rem; max-width: 760px; }
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--white);
+      text-align: left;
+      padding: 1.2rem 1.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .faq-q .arrow {
+      color: var(--cyan);
+      font-size: 1.1rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-q .arrow { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.3s;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      padding: 0 1.5rem;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 1.5rem 1.2rem;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+    .cta-box {
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--navy-2);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3.5rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+    }
+    .cta-glow {
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,108,255,0.15) 0%, transparent 70%);
+      top: -100px; left: 50%; transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .cta-box h2 { margin-bottom: 1rem; }
+    .cta-box p { color: var(--muted); margin-bottom: 2rem; line-height: 1.7; }
+    .code-display {
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 1.5rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--cyan);
+      margin: 0 auto 2rem;
+      display: inline-block;
+    }
+    .code-sub { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(136,146,176,0.5);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.35s; }
+    .delay-4 { animation-delay: 0.5s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .perfs-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .bonus-banner { flex-wrap: wrap; }
+      .bonus-badge { margin-left: 0; }
+    }
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .stat-cards { grid-template-columns: 1fr 1fr; }
+      nav { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">splint<span>.</span>invest</div>
+    <a href="#cta" class="nav-cta">Obtenir 50 € offerts →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag fade-in">Investissement alternatif</div>
+        <h1 class="fade-in delay-1">Investissez dans<br><span class="accent">l'art, les cartes</span><br>et le <span class="accent-2">luxe</span></h1>
+        <p class="hero-desc fade-in delay-2">Splint Invest permet d'acheter des fractions d'actifs rares — sneakers, œuvres d'art, sacs de luxe — dès 50 €. Des placements tangibles, hors des marchés traditionnels.</p>
+        <div class="hero-actions fade-in delay-3">
+          <a href="#cta" class="btn-primary">🎁 50 € offerts à l'inscription</a>
+          <a href="#comment" class="btn-secondary">Comment ça marche ?</a>
+        </div>
+      </div>
+
+      <div class="hero-card fade-in delay-4">
+        <div class="portfolio-tag">✦ Mon portefeuille · Données réelles</div>
+        <div class="card-label">Valeur totale</div>
+        <div class="card-value">671,92 €</div>
+        <div style="color: var(--green); font-size: 0.85rem; margin-top: 0.3rem;">+21,92 € depuis le début</div>
+        <div class="card-divider"></div>
+        <div class="card-row">
+          <span class="row-label">Performance globale</span>
+          <span class="row-value up">+3,4%</span>
+        </div>
+        <div class="card-row">
+          <span class="row-label">Actifs détenus</span>
+          <span class="row-value neutral">11 investissements</span>
+        </div>
+        <div class="card-row">
+          <span class="row-label">Catégories</span>
+          <span class="row-value neutral">3 (Art, Cartes, Luxe)</span>
+        </div>
+        <div class="card-row">
+          <span class="row-label">Depuis</span>
+          <span class="row-value neutral">Février 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS BANNER -->
+  <div style="padding: 0 2rem; position: relative; z-index: 1;">
+    <div class="bonus-banner">
+      <div class="bonus-icon">🎁</div>
+      <div class="bonus-text">
+        <strong>50 € offerts pour tout nouvel inscrit</strong>
+        <p>Inscris-toi via mon lien et investis <span>au moins 50 € de ton propre argent</span> — tu reçois automatiquement 50 € supplémentaires à investir. C'est un doublement instantané de ta première mise.</p>
+      </div>
+      <div class="bonus-badge">+50 €</div>
+    </div>
+  </div>
+
+  <!-- WHAT IS SPLINT -->
+  <section id="splint">
+    <div class="section-inner">
+      <div class="section-tag">La plateforme</div>
+      <h2>Pourquoi Splint Invest ?</h2>
+      <p class="section-sub">Des actifs qui n'ont rien à voir avec la bourse, gérés par des experts, accessibles à tous.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🖼️</span>
+          <div class="feature-title">Actifs tangibles & rares</div>
+          <p class="feature-desc">Art contemporain, cartes de sport gradées PSA, sacs Hermès, Pokémon 1st edition… Des objets de collection à forte valeur patrimoniale.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔪</span>
+          <div class="feature-title">Fractions dès 50 €</div>
+          <p class="feature-desc">Chaque actif est découpé en "Splints". Tu achètes une fraction de l'objet et profites de sa valorisation au prorata de ta part.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🛡️</span>
+          <div class="feature-title">Actifs stockés & assurés</div>
+          <p class="feature-desc">Splint gère la conservation, le stockage sécurisé et l'assurance de chaque actif. Tu n'as rien à gérer physiquement.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🌍</span>
+          <div class="feature-title">Décorrélé des marchés</div>
+          <p class="feature-desc">Les actifs alternatifs évoluent indépendamment des actions et obligations. Une vraie diversification de portefeuille.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">📊</span>
+          <div class="feature-title">Marché secondaire</div>
+          <p class="feature-desc">Tu peux revendre tes Splints sur le marché interne à d'autres investisseurs avant la liquidation de l'actif.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">✅</span>
+          <div class="feature-title">Régulé & transparent</div>
+          <p class="feature-desc">Splint Invest est une société suisse enregistrée. Chaque actif est documenté avec des données de valorisation régulièrement mises à jour.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFORMANCES -->
+  <section class="perfs-section" id="perfs">
+    <div class="section-inner">
+      <div class="section-tag">Performances</div>
+      <h2>Ce que ça donne en pratique</h2>
+      <p class="section-sub">Mon portefeuille personnel, et des exemples d'actifs disponibles sur la plateforme.</p>
+
+      <div class="perfs-grid">
+        <!-- Mes stats -->
+        <div>
+          <p style="font-size: 0.8rem; color: var(--cyan); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.08em;">📂 Mon portefeuille (réel)</p>
+          <div class="stat-cards">
+            <div class="stat-card">
+              <div class="sc-label">Valeur totale</div>
+              <div class="sc-value">671 €</div>
+              <div class="sc-sub">+21,92 € de plus-value</div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-label">Performance</div>
+              <div class="sc-value green">+3,4%</div>
+              <div class="sc-sub">Portefeuille global</div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-label">Investissements</div>
+              <div class="sc-value">11</div>
+              <div class="sc-sub">Actifs détenus</div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-label">Catégories</div>
+              <div class="sc-value">3</div>
+              <div class="sc-sub">Art · Cartes · Luxe</div>
+            </div>
+          </div>
+          <p class="disclaimer">* Portefeuille personnel, données au 17 mars 2026. Les performances passées ne préjugent pas des performances futures.</p>
+        </div>
+
+        <!-- Actifs showcase -->
+        <div>
+          <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.08em;">📈 Exemples d'actifs sur la plateforme</p>
+          <div class="asset-showcase">
+            <div class="asset-header">
+              <span>Actif</span>
+              <span>Performance</span>
+            </div>
+            <div class="asset-item">
+              <div>
+                <div class="asset-name">Pokémon S&M Team Up Case</div>
+                <div class="asset-cat">Cartes · 1 Splint</div>
+              </div>
+              <div class="asset-perf green">+9,6%</div>
+            </div>
+            <div class="asset-item">
+              <div>
+                <div class="asset-name">Fernando Botero, Flautista 2023</div>
+                <div class="asset-cat">Art · 1 Splint</div>
+              </div>
+              <div class="asset-perf green">+7,0%</div>
+            </div>
+            <div class="asset-item">
+              <div>
+                <div class="asset-name">Antony Daley, Herefrom</div>
+                <div class="asset-cat">Art · 1 Splint</div>
+              </div>
+              <div class="asset-perf green">+7,3%</div>
+            </div>
+            <div class="asset-item">
+              <div>
+                <div class="asset-name">Yao Ming 2005 UD Dual Auto</div>
+                <div class="asset-cat">Cartes · 1 Splint</div>
+              </div>
+              <div class="asset-perf green">+2,5%</div>
+            </div>
+            <div class="asset-item">
+              <div>
+                <div class="asset-name">Frida Kahlo, Corporeal Field</div>
+                <div class="asset-cat">Art · 1 Splint</div>
+              </div>
+              <div class="asset-perf neutral">+0,0%</div>
+            </div>
+          </div>
+
+          <div class="star-asset">
+            <div class="star-asset-name">Zinedine Zidane — Donruss FIFA Kaboom Black 1of1 PSA 8</div>
+            <div style="font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem;">Carte · Édition unique · Gradée PSA 8</div>
+            <div class="star-asset-stats">
+              <div class="sas-item">
+                <div class="sas-label">Performance</div>
+                <div class="sas-value green">+12,5%</div>
+              </div>
+              <div class="sas-item">
+                <div class="sas-label">Durée de détention</div>
+                <div class="sas-value">< 6 mois</div>
+              </div>
+              <div class="sas-item">
+                <div class="sas-label">Valeur actuelle</div>
+                <div class="sas-value">56,23 €</div>
+              </div>
+            </div>
+          </div>
+          <p class="disclaimer">* Actifs disponibles sur Splint Invest. Les performances individuelles peuvent varier.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="comment">
+    <div class="section-inner">
+      <div class="section-tag">Démarrer</div>
+      <h2>En 4 étapes simples</h2>
+      <p class="section-sub">Du téléchargement à ton premier investissement, tout se passe sur l'app en quelques minutes.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title">Télécharge l'app</div>
+          <p class="step-desc">Disponible sur iOS et Android. Inscription en moins de 5 minutes avec vérification d'identité.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title">Entre le code</div>
+          <p class="step-desc">Utilise le code <strong style="color: var(--cyan);">873310070</strong> à l'inscription pour activer ton bonus de 50 €.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title">Investis 50 €</div>
+          <p class="step-desc">Effectue ton premier investissement d'au moins 50 € sur l'actif de ton choix pour débloquer le bonus.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-title">Reçois 50 € offerts</div>
+          <p class="step-desc">50 € supplémentaires sont crédités automatiquement sur ton compte, disponibles immédiatement pour investir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background: var(--navy-2);" id="faq">
+    <div class="section-inner">
+      <div class="section-tag">Questions fréquentes</div>
+      <h2>Ce que tu te demandes sûrement</h2>
+      <p class="section-sub">Les vraies questions auxquelles Splint répond.</p>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            C'est quoi concrètement un "Splint" ?
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-a">Un Splint est une fraction d'un actif physique. Par exemple, un sac Hermès à 5 000 € peut être découpé en 100 Splints à 50 € chacun. Tu achètes 1 Splint et tu détiens 1% de la valeur du sac. Si le sac prend de la valeur, ta fraction aussi.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Comment récupérer mon argent ?
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-a">Il y a deux façons de sortir : vendre tes Splints sur le marché secondaire à d'autres investisseurs (disponible dans l'app), ou attendre la liquidation planifiée de l'actif par Splint, où ils vendent l'objet au prix du marché et te reversent ta part.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Et si la plateforme Splint ferme ?
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-a">Les actifs physiques sont détenus dans des entités juridiques séparées (SPV). Ils ne font pas partie du bilan de Splint Invest. En cas de fermeture, les actifs seraient liquidés et les fonds reversés aux investisseurs.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Le bonus de 50 € est vraiment sans condition cachée ?
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-a">La seule condition : investir au moins 50 € de ton propre argent. Le bonus est ensuite crédité directement, sans délai de blocage particulier. Tu peux l'utiliser comme n'importe quel euro sur la plateforme.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            C'est accessible depuis la France ?
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-a">Oui, Splint Invest est accessible depuis la France, la Belgique, la Suisse et la plupart des pays européens. L'application est disponible en français.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Quel montant minimum pour investir ?
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-a">Le minimum par Splint est généralement de 50 €, ce qui rend la plateforme accessible même avec un petit budget. Tu peux construire un portefeuille diversifié avec quelques centaines d'euros seulement.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <div class="cta-box">
+      <div class="cta-glow"></div>
+      <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎁</div>
+      <h2>Prêt à investir dans l'exceptionnel ?</h2>
+      <p>Utilise mon code de parrainage et commence avec 100 € investis pour le prix de 50 €. Pas de frais cachés, pas d'engagement.</p>
+      <div class="code-display">
+        873310070
+        <span class="code-sub">Code parrainage · 50 € offerts</span>
+      </div>
+      <br>
+      <a href="https://splintinvest.com/referral/873310070" class="btn-primary" style="font-size: 1rem; padding: 1rem 2.5rem;">
+        S'inscrire avec 50 € offerts →
+      </a>
+      <p style="margin-top: 1.2rem; font-size: 0.78rem; color: var(--muted);">Offre valable pour tout nouvel utilisateur. Bonus activé après premier investissement de 50 €.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Page de présentation personnelle — non affiliée officiellement à Splint Invest AG.<br>
+    Les performances affichées sont réelles mais passées. Investir comporte des risques de perte en capital.</p>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // Intersection Observer pour animer les éléments au scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.feature-card, .stat-card, .step, .faq-item, .asset-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
